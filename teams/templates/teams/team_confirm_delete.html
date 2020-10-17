@@ -1,0 +1,27 @@
+{% extends 'page.html' %}
+{% load static %}
+{% block page_content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Delete Team: {{ team.name }}</h1>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4 shadow-sm">
+            <form action="" method="post" >
+              {% csrf_token %}
+              <input type="submit" value="Delete" class="btn btn-danger">
+              <a href="{% url 'teams:list' %}" value="Cancel" class="btn btn-primary">Cancel</a>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

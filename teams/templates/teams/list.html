@@ -1,0 +1,73 @@
+{% extends 'page.html' %}
+{% load static %}
+{% block page_content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Teams</h1>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+      {% if teams %}
+        {% for team in teams %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              {% if team.photo %}
+                <img class="card-img-top" width="100%" height="225" src="{{ team.photo.url }}" alt="">
+              {% else %}
+                <img class="card-img-top" width="100%" height="225" src="{% static 'images/team_default.jpg' %}" alt="">
+              {% endif %}
+              <div class="card-body">
+                <h3 class="card-title">{{ team.name }}</h3>
+                <p class="card-text">{{ team.location }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="{% url 'teams:detail' team.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+                    <a href="{% url 'teams:update' team.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-md-12">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <p class="card-text">There are not teams yet</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+
+      </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save" class="btn btn-primary">
+          </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+  </div>
+
+
+{% endblock %}
